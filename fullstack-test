@@ -112,7 +112,11 @@ GET    /api/tags              - Obtener etiquetas
      - Comandos de ejecución
      - Estructura del proyecto
      - Variables de entorno necesarias
-
+   - Crea el Pull Request desde GitHub:
+         Base: develop
+         Compare: feature/[TU_NOMBRE]-solution
+         Título: "Solución Prueba Técnica - [TU_NOMBRE]"
+   - Enviar al correo [edison.delgado@evol.energy](mailto:edison.delgado@evol.energy) con copia a [carolina.duarte@evol.energy](mailto: carolina.duarte@evol.energy) avisando que la prueba técnica está lista para revisión con el asunto "Prueba Técnica Evol". 
 2. Docker Compose funcional para levantar el proyecto completo
 
 ## Criterios de Evaluación (100 puntos)
