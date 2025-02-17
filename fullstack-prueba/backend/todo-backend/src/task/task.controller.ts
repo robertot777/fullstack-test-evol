@@ -1,29 +1,32 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { Task } from './task.entity';
-
 
 @Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @Get()
-  findAll(): Promise<Task[]> {
-    return this.taskService.findAll();
-  }
-
+  // Crear una nueva tarea
   @Post()
-  create(@Body() task: Task): Promise<Task> {
+  create(@Body() task: Task) {
     return this.taskService.create(task);
   }
 
+  // Obtener todas las tareas
+  @Get()
+  findAll() {
+    return this.taskService.findAll();
+  }
+
+  // Actualizar una tarea por su ID
   @Put(':id')
-  update(@Param('id') id: number, @Body() task: Task): Promise<Task> {
+  update(@Param('id') id: number, @Body() task: Task) {
     return this.taskService.update(id, task);
   }
 
+  // Eliminar una tarea por su ID
   @Delete(':id')
-  remove(@Param('id') id: number): Promise<void> {
+  remove(@Param('id') id: number) {
     return this.taskService.remove(id);
   }
 }

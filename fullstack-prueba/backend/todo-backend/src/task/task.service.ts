@@ -1,19 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Task } from './task.entity';
 
 @Injectable()
 export class TaskService {
-  remove(id: number): Promise<void> {
-    throw new Error('Method not implemented.');
+  constructor(
+    @InjectRepository(Task)
+    private taskRepository: Repository<Task>,
+  ) {}
+
+  async findAll(): Promise<Task[]> {
+    return this.taskRepository.find();
   }
-  update(id: number, task: Task): Promise<Task> {
-    throw new Error('Method not implemented.');
+
+  async create(task: Task): Promise<Task> {
+    return this.taskRepository.save(task);
   }
-  create(task: Task): Promise<import("./task.entity").Task> {
-    throw new Error('Method not implemented.');
+
+  async update(id: number, task: Task): Promise<Task> {
+    await this.taskRepository.update(id, task);
+    const updatedTask = await this.taskRepository.findOneBy({ id });
+    if (!updatedTask) {
+      throw new Error(`Task with id ${id} not found`);
+    }
+    return updatedTask;
   }
-  findAll(): Promise<import("./task.entity").Task[]> {
-    throw new Error('Method not implemented.');
+
+  async remove(id: number): Promise<void> {
+    await this.taskRepository.delete(id);
   }
-  // Add your service methods here
 }
