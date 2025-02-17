@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import tasksReducer from './features/tasksSlice';
+import tasksReducer from './components/tasksSlice';
 
 interface Task {
   id: number;
